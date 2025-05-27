@@ -1,5 +1,5 @@
-import SignIn from "../../components/SignIn/sign-in.component";
-import SignUp from "../../components/Signup-form/sign-up-form.component";
+import SignIn from "../../components/signIn/sign-in.component";
+import SignUp from "../../components/signup-form/sign-up-form.component";
 
 const Authentication = () => {
   return (

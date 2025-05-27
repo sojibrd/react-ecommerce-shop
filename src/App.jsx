@@ -1,9 +1,10 @@
 import { Routes, Route } from "react-router";
-import Home from "./routes/Home/home.component";
+import Home from "./routes/home/home.component";
 import "./App.scss";
-import Navigation from "./components/Navigation/Navigation.component";
-import Categories from "./components/Categories/Categories.component";
+import Navigation from "./components/navigation/navigation.component";
 import Authentication from "./routes/authentication/authentication.component";
+import Shop from "./routes/shop/shop.component";
+import Checkout from "./routes/checkout/checkout.component";
 
 function App() {
   return (
@@ -11,8 +12,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigation />}>
           <Route index path="home" element={<Home />} />
-          <Route path="categories" element={<Categories />} />
+          <Route path="shop" element={<Shop />} />
           <Route path="auth" element={<Authentication />} />
+          <Route path="checkout" element={<Checkout />} />
         </Route>
       </Routes>
     </>
