@@ -17,9 +17,9 @@ const Navigation = () => {
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <div>Logo</div>
         <div style={{ display: "flex" }}>
-          <div style={{ padding: "15px" }}>
+          {/* <div style={{ padding: "15px" }}>
             <Link to={"/home"}>Home</Link>
-          </div>
+          </div> */}
           <div style={{ padding: "15px" }}>
             <Link to={"/shop"}>Shop</Link>
           </div>
