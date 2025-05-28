@@ -1,9 +1,9 @@
 import { Routes, Route } from "react-router";
 import "./App.scss";
-import Navigation from "./components/navigation/navigation.component.js";
-import Authentication from "./routes/authentication/authentication.component.jsx";
-import Shop from "./routes/shop/shop.component.jsx";
-import Checkout from "./routes/checkout/checkout.component.jsx";
+import Navigation from "./components/navigation/navigation.component";
+import Authentication from "./routes/authentication/authentication.component";
+import Shop from "./routes/shop/shop.component";
+import Checkout from "./routes/checkout/checkout.component";
 
 function App() {
   return (
