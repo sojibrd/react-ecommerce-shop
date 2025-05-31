@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import {
   createAuthWithUserAndPassword,
   createUserDocumentFromAuth,
@@ -11,12 +11,12 @@ const defaultValue = {
   confirmPassword: "",
 };
 const SignUp = () => {
-  const [formFeilds, setFormFeilds] = useState(defaultValue);
-  const { displayName, email, password, confirmPassword } = formFeilds;
+  const [formFields, setFormFields] = useState(defaultValue);
+  const { displayName, email, password, confirmPassword } = formFields;
   const handleInput = (event) => {
     const { name, value } = event.target;
 
-    setFormFeilds({ ...formFeilds, [name]: value });
+    setFormFields({ ...formFields, [name]: value });
   };
 
   const handleSubmit = async (event) => {
@@ -29,7 +29,7 @@ const SignUp = () => {
     try {
       const { user } = await createAuthWithUserAndPassword(email, password);
       await createUserDocumentFromAuth(user, { displayName });
-      setFormFeilds(defaultValue);
+      setFormFields(defaultValue);
     } catch (error) {
       console.log("failed to create");
     }

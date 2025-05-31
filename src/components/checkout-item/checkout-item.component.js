@@ -1,10 +1,23 @@
-import { useContext } from "react";
-import { CartContext } from "../../contexts/cart.context";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCartItems } from "../../store/cart/cart.selector";
+import {
+  addItemToCart,
+  clearCartItem,
+  removeItemFromCart,
+} from "../../store/cart/cart.action";
 
 const CheckoutItem = ({ checkoutItem }) => {
-  const { cartItems, addItemToCart, removeItemFromCart, clearCartItem } =
-    useContext(CartContext);
   const { id, name, price, imageUrl, quantity } = checkoutItem;
+  const dispatch = useDispatch();
+
+  const cartItems = useSelector(selectCartItems);
+
+  const addItemHandler = () => dispatch(addItemToCart(cartItems, checkoutItem));
+  const removeItemHandler = () =>
+    dispatch(removeItemFromCart(cartItems, checkoutItem));
+  const clearItemHandler = () =>
+    dispatch(clearCartItem(cartItems, checkoutItem));
+
   return (
     <>
       <tr>
@@ -15,15 +28,15 @@ const CheckoutItem = ({ checkoutItem }) => {
         </td>
         <td>
           <div>
-            <button onClick={() => addItemToCart(checkoutItem)}>+</button>
+            <button onClick={addItemHandler}>+</button>
           </div>
           {quantity}
           <div>
-            <button onClick={() => removeItemFromCart(checkoutItem)}>-</button>
+            <button onClick={removeItemHandler}>-</button>
           </div>
         </td>
         <td>{price}</td>
-        <td onClick={() => clearCartItem(checkoutItem)}>X</td>
+        <td onClick={clearItemHandler}>X</td>
       </tr>
     </>
   );

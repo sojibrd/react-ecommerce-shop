@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import {
   SignInAuthWithUserAndPassword,
   signInWithGoogle,
@@ -9,13 +9,13 @@ const defaultValue = {
   password: "",
 };
 const SignIn = () => {
-  const [formFeilds, setFormFeilds] = useState(defaultValue);
-  const { email, password } = formFeilds;
+  const [formFields, setFormFields] = useState(defaultValue);
+  const { email, password } = formFields;
 
   const handleInput = (event) => {
     const { name, value } = event.target;
 
-    setFormFeilds({ ...formFeilds, [name]: value });
+    setFormFields({ ...formFields, [name]: value });
   };
 
   const handleSubmit = async (event) => {
@@ -23,7 +23,7 @@ const SignIn = () => {
 
     try {
       await SignInAuthWithUserAndPassword(email, password);
-      setFormFeilds(defaultValue);
+      setFormFields(defaultValue);
     } catch (error) {
       console.log("failed to create");
     }
