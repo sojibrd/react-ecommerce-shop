@@ -12,13 +12,8 @@ export const selectIsCartOpen = createSelector(
   (cart) => cart.isCartOpen
 );
 
-export const selectCartCount = createSelector(
-  [selectCartItems],
-  (cartItems) => {
-    console.log('cc', cartItems);
-    
-    return cartItems.reduce((total, item) => total + item.quantity, 0);
-  }
+export const selectCartCount = createSelector([selectCartItems], (cartItems) =>
+  cartItems.reduce((total, item) => total + item.quantity, 0)
 );
 
 export const selectCartTotal = createSelector([selectCartItems], (cartItems) =>
