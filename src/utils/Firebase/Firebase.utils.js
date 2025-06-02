@@ -41,6 +41,7 @@ googleProvider.setCustomParameters({
 export const signInWithGoogle = async () => {
   try {
     const result = await signInWithPopup(auth, googleProvider);
+
     return result;
   } catch (error) {
     console.error("Google sign-in error:", error);
@@ -66,12 +67,11 @@ export const addCollectionAndDocuments = async (
   console.log("done");
 };
 
-export const getCategoriesAndDocuments = async () => {
-  const collectionRef = collection(db, "categories");
+export const getCategoriesAndDocuments = async (path) => {
+  const collectionRef = collection(db, path);
   const q = query(collectionRef);
   const querySnapshot = await getDocs(q);
-
-  return querySnapshot.docs.map(snapshot => snapshot.data())
+  return querySnapshot.docs.map((snapshot) => snapshot.data());
 };
 
 export const createUserDocumentFromAuth = async (
@@ -79,6 +79,7 @@ export const createUserDocumentFromAuth = async (
   additionalInfo = {}
 ) => {
   if (!userAuth) return;
+
   const userDocRef = doc(db, "users", userAuth.uid);
   const userSnapShot = await getDoc(userDocRef);
 
@@ -105,6 +106,7 @@ export const createUserDocumentFromAuth = async (
   } catch (error) {
     console.log("error catching the user", error.message);
   }
+  return userSnapShot;
 };
 
 export const createAuthWithUserAndPassword = async (email, password) => {
@@ -118,5 +120,19 @@ export const SignInAuthWithUserAndPassword = async (email, password) => {
 };
 
 export const SignOutUser = async () => await signOut(auth);
+
 export const onAuthUserStateChanged = (callback) =>
   onAuthStateChanged(auth, callback);
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (userAuth) => {
+        unsubscribe();
+        resolve(userAuth);
+      },
+      reject
+    );
+  });
+};

@@ -3,12 +3,18 @@ import {
   SignInAuthWithUserAndPassword,
   signInWithGoogle,
 } from "../../utils/Firebase/Firebase.utils";
+import { useDispatch } from "react-redux";
+import {
+  emailSigninStart,
+  googleSigninStart,
+} from "../../store/user/user.action";
 
 const defaultValue = {
   email: "",
   password: "",
 };
 const SignIn = () => {
+  const dispatch = useDispatch();
   const [formFields, setFormFields] = useState(defaultValue);
   const { email, password } = formFields;
 
@@ -22,7 +28,8 @@ const SignIn = () => {
     event.preventDefault();
 
     try {
-      await SignInAuthWithUserAndPassword(email, password);
+      // await SignInAuthWithUserAndPassword(email, password);
+      dispatch(emailSigninStart(email, password));
       setFormFields(defaultValue);
     } catch (error) {
       console.log("failed to create");
@@ -31,7 +38,8 @@ const SignIn = () => {
 
   const onSignInGoogle = async () => {
     try {
-      await signInWithGoogle();
+      // await signInWithGoogle();
+      dispatch(googleSigninStart());
     } catch (error) {
       console.error("Google sign-in error:", error);
     }
@@ -42,8 +50,6 @@ const SignIn = () => {
       <button onClick={onSignInGoogle}>Sign in with google popup</button>
 
       <form onSubmit={handleSubmit}>
-        <label>Name</label>
-
         <label>Email</label>
         <input type="email" name="email" value={email} onChange={handleInput} />
 

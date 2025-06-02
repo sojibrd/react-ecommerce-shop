@@ -11,7 +11,6 @@ import Loading from "../../components/loading/loading.component";
 const CategoriesPreview = () => {
   const categoriesMap = useSelector(selectCategoriesMap);
   const isLoading = useSelector(selectCategoriesIsLoading);
-  console.log("isLoading", isLoading);
 
   return (
     <Fragment>

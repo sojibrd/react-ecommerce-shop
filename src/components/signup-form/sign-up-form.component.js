@@ -3,6 +3,8 @@ import {
   createAuthWithUserAndPassword,
   createUserDocumentFromAuth,
 } from "../../utils/Firebase/Firebase.utils";
+import { useDispatch } from "react-redux";
+import { signUpStart } from "../../store/user/user.action";
 
 const defaultValue = {
   displayName: "",
@@ -11,6 +13,7 @@ const defaultValue = {
   confirmPassword: "",
 };
 const SignUp = () => {
+  const dispatch = useDispatch();
   const [formFields, setFormFields] = useState(defaultValue);
   const { displayName, email, password, confirmPassword } = formFields;
   const handleInput = (event) => {
@@ -27,8 +30,9 @@ const SignUp = () => {
       return;
     }
     try {
-      const { user } = await createAuthWithUserAndPassword(email, password);
-      await createUserDocumentFromAuth(user, { displayName });
+      // const { user } = await createAuthWithUserAndPassword(email, password);
+      dispatch(signUpStart(email, password));
+      // await createUserDocumentFromAuth(user, { displayName });
       setFormFields(defaultValue);
     } catch (error) {
       console.log("failed to create");
