@@ -4,8 +4,9 @@ import { rootReducer } from "./root-reducer";
 // import { myLogger } from "../middlewares/logger";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
+import { thunk } from "redux-thunk";
 
-const middleWares = [process.env.NODE_ENV !== "production" && logger].filter(
+const middleWares = [process.env.NODE_ENV !== "production" && logger, thunk].filter(
   Boolean
 );
 
