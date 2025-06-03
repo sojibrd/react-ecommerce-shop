@@ -9,7 +9,7 @@ import {
   onAuthUserStateChanged,
 } from "./utils/Firebase/Firebase.utils";
 import { useEffect } from "react";
-import { setCurrentUser } from "./store/user/user.action";
+import { setCurrentUser } from "./store/user/user.reducer";
 import { useDispatch } from "react-redux";
 
 function App() {
@@ -17,6 +17,7 @@ function App() {
   useEffect(() => {
     const unsubscribe = onAuthUserStateChanged((user) => {
       dispatch(setCurrentUser(user));
+
       if (user) {
         createUserDocumentFromAuth(user);
       }
