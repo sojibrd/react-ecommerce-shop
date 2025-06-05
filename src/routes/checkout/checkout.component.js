@@ -4,13 +4,14 @@ import {
   selectCartItems,
   selectCartTotal,
 } from "../../store/cart/cart.selector";
+import PaymentForm from "../../components/payment-form/payment-form.component";
 
 const Checkout = () => {
   const cartItems = useSelector(selectCartItems);
   const cartTotal = useSelector(selectCartTotal);
   return (
     <>
-      <table border={1} style={{ textAlign: "center" }}>
+      <table border={1} style={{ textAlign: "center", width: "100%" }}>
         <thead>
           <tr>
             <td>id</td>
@@ -31,7 +32,10 @@ const Checkout = () => {
             <td></td>
             <td></td>
             <td></td>
-            <td>Total: ${cartTotal}</td>
+            <td>
+              Total: ${cartTotal}
+              <PaymentForm />
+            </td>
           </tr>
         </tbody>
       </table>
